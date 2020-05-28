@@ -1,0 +1,22 @@
+# short-description: Create EMMC card image with a boot partition (1GB)
+# long-description: Creates a partitioned EMMC card image (1GB)
+#
+# Warning: the first stage of boot (here fsbl1, fsbl2, ssbl) MUST be on GPT partition to be detected.
+#
+# Number  Start (sector)    End (sector)  Size       Code  Name
+#   1            1024            5119   2.0 MiB     8301  ssbl
+#   2            5120          136191   64.0 MiB    8300  bootfs
+#   3          136192         1673055   750.4 MiB   8300  rootfs
+#   4         1673056         3145694   719.1 MiB   8300  userfs
+#
+
+part ssbl  --source rawcopy --sourceparams="file=u-boot-stm32mp153a-dk2.stm32" --ondisk mmcblk --label ssbl --part-type 0x8301 --fixed-size 2048K
+
+part bootfs --source rawcopy --sourceparams="file=st-image-bootfs-openstlinux-weston-stm32mp1.ext4" --ondisk mmcblk --fstype=ext4 --label bootfs --active --fixed-size 64M
+part / --source rootfs --ondisk mmcblk --fstype=ext4 --label rootfs --fixed-size 768M
+part usrfs --source rawcopy --sourceparams="file=st-image-userfs-openstlinux-weston-stm32mp1.ext4" --ondisk mmcblk --fstype=ext4 --label userfs --active --fixed-size 173M
+
+bootloader --ptable gpt
+
+
+
