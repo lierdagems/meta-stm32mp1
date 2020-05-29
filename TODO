@@ -1,0 +1,11 @@
+# 如何调试
+
+- 检测所有配方的 LIC_FILES_CHKSUM
+- 测试配方 u-boot-stm32mp-extlinux
+- 测试配方 u-boot-stm32mp-splash
+
+- 测试配方 recipes-extended/images/*(bootfs和userfs)
+
+- 添加音频1 recipes-multimedia/alsa/
+- 添加音频2 recipes-multimedia/pulseaudio/
+- 添加 wifi 蓝牙支持
