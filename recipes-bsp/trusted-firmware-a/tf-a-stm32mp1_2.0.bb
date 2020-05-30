@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://license.rst;md5=e927e02bca647e14efd87e9e914b2443"
 inherit deploy
 
 # SRC_URI
-SRC_URI = "https://github.com/lierda/arm-trusted-firmware.git"
+SRC_URI = "git://github.com/lierdagems/arm-trusted-firmware.git"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
