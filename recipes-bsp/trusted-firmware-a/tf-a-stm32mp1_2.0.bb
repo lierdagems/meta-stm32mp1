@@ -3,6 +3,10 @@ SECTION = "bootloaders"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://license.rst;md5=e927e02bca647e14efd87e9e914b2443"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+DEPENDS += "dtc-native"
+
 inherit deploy
 
 # SRC_URI
@@ -53,11 +57,16 @@ base_do_unpack_append () {
 }
 
 do_compile() {
+    unset LDFLAGS
+    unset CFLAGS
+    unset CPPFLAGS
+
     oe_runmake -C ${S} DTB_FILE_NAME=${TF_A_DEVICETREE}.dtb BUILD_PLAT=${B}
 }
 
 do_deploy() {
-    install -m 644 {${B}/tf-a-${TF_A_DEVICETREE}.stm32 ${DEPLOYDIR}/tf-a-${TF_A_DEVICETREE}.stm32
+    install -d ${DEPLOYDIR}
+    install -m 644 ${B}/tf-a-${TF_A_DEVICETREE}.stm32 ${DEPLOYDIR}/
 }
 addtask deploy before do_build after do_compile
 
