@@ -9,6 +9,12 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+
+do_configure() {
+    oe_runmake ${KBUILD_DEFCONFIG} -C ${S} O=${B}
+}
+
 MODULE_TARBALL_DEPLOY = "0"
 
 
