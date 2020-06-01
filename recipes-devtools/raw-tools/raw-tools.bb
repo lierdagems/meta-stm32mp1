@@ -1,8 +1,7 @@
 # This is copying form sdcard-raw-tools.bb of meta-st-stm32mp
 SUMMARY = "Script for creating raw image ready to flash"
 LICENSE = "MIT"
-# TODO: LIC_FILES_CHKSUM
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3da9cfbcb788c80a0384361b4de20420"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 SRC_URI = "file://create_flashlayout.sh"
 
