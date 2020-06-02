@@ -1,0 +1,25 @@
+# short-description: Create SD card image with a boot partition (1GB)
+# long-description: Creates a partitioned SD card image (1GB)
+#
+# Warning: the first stage of boot (here fsbl1, fsbl2, ssbl) MUST be on GPT partition to be detected.
+#
+# Number  Start (sector)    End (sector)  Size       Code  Name
+#   1              34             545   256.0 KiB   8301  fsbl1
+#   2             546            1057   256.0 KiB   8301  fsbl2
+#   3            1058            5153   2.0 MiB     8301  ssbl
+#   4            5154          136225   64.0 MiB    8300  bootfs
+#   5          136226         1664033   746.0 MiB   8300  rootfs
+#   6         1664034        15126492   6.4 GiB     8300  userfs
+
+part fsbl1 --source rawcopy --fstype=ext4 --fsoptions "noauto" --part-name=fsbl1 --sourceparams="file=tf-a-stm32mp157c-dk2.stm32" --ondisk mmcblk --part-type 0x8301 --fixed-size 256K --align 17
+part fsbl2 --source rawcopy --fstype=ext4 --fsoptions "noauto" --part-name=fsbl2 --sourceparams="file=tf-a-stm32mp157c-dk2.stm32" --ondisk mmcblk --part-type 0x8301 --fixed-size 256K
+part ssbl  --source rawcopy --fstype=ext4 --fsoptions "noauto" --part-name=ssbl --sourceparams="file=u-boot-stm32mp1.stm32" --ondisk mmcblk --part-type 0x8301 --fixed-size 2048K
+
+part bootfs --source rawcopy --sourceparams="file=st-image-bootfs-stm32mp1.ext4" --ondisk mmcblk --fstype=ext4 --label bootfs --active --fixed-size 64M
+part / --source rootfs --ondisk mmcblk --fstype=ext4 --label rootfs --fixed-size 768M
+part usrfs --source rawcopy --sourceparams="file=st-image-userfs-stm32mp1.ext4" --ondisk mmcblk --fstype=ext4 --label userfs --active --fixed-size 173M
+
+bootloader --ptable gpt
+
+
+
