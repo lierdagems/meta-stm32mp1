@@ -30,12 +30,14 @@ do_install() {
     install -d ${D}/${UBOOT_EXTLINUX_INSTALL_DIR}
     # Install boot script
     if [ -e ${UBOOT_EXTLINUX_BOOTSCR} ]; then
-        install -m 755 ${UBOOT_EXTLINUX_BOOTSCR} ${D}/${UBOOT_EXTLINUX_INSTALL_DIR}
+        install -m 755 ${UBOOT_EXTLINUX_BOOTSCR} ${D}${UBOOT_EXTLINUX_INSTALL_DIR}
     fi
     # Install extlinux files
-    if [ -e ${WORKDIR}/UBOOT_EXTLINUX_CONF ]; then
-        cp ${WORKDIR}/UBOOT_EXTLINUX_CONF ${D}/${UBOOT_EXTLINUX_INSTALL_DIR}
-    fi
+    install -d ${D}/${UBOOT_EXTLINUX_INSTALL_DIR}/mmc0_${UBOOT_DEVICETREE}_extlinux/
+    install -d ${D}/${UBOOT_EXTLINUX_INSTALL_DIR}/mmc1_${UBOOT_DEVICETREE}_extlinux/
+    cp ${WORKDIR}/${UBOOT_EXTLINUX_CONF} ${D}${UBOOT_EXTLINUX_INSTALL_DIR}/mmc0_${UBOOT_DEVICETREE}_extlinux/
+    cp ${WORKDIR}/${UBOOT_EXTLINUX_CONF} ${D}${UBOOT_EXTLINUX_INSTALL_DIR}/mmc1_${UBOOT_DEVICETREE}_extlinux/
+
 }
 # TODO: FILES
 FILES_${PN} = "${UBOOT_EXTLINUX_INSTALL_DIR}"
