@@ -7,4 +7,4 @@ tmpfs                /run                 tmpfs      mode=0755,nodev,nosuid,stri
 tmpfs                /var/volatile        tmpfs      defaults              0  0
 
 /dev/mmcblk0p4      /boot                 ext4       defaults,sync         0  1
-/dev/mmcblk0p7      /usr/local            ext4       defaults,sync         0  1
+/dev/mmcblk0p6      /usr/local            ext4       defaults,sync         0  1
