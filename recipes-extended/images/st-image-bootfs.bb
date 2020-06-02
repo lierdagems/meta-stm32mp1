@@ -7,8 +7,10 @@ IMAGE_FSTYPES_remove = "wic"
 
 IMAGE_PARTITION_MOUNTPOINT = "/boot"
 
+EXTRA_IMAGECMD_ext4 = "-i 4096 -L bootfs -O ^metadata_csum,^dir_index"
+
 # Reset image feature
-#IMAGE_FEATURE = ""
+IMAGE_FEATURE = ""
 
 # Set ROOTFS_MAXSIZE to expected ROOTFS_SIZE to use the whole disk partition and leave extra space to user
 IMAGE_ROOTFS_SIZE        = "65536"
@@ -23,12 +25,14 @@ PACKAGE_INSTALL = ""
 LINGUAS_INSTALL = ""
 IMAGE_LINGUAS = ""
 
+IMAGETYPE = "uimage"
+
 # Add specific package for our image:
 PACKAGE_INSTALL += " \
     kernel-devicetree \
-    kernel-image-${KERNEL_IMAGETYPE}  \
-    u-boot-stm32mp-extlinux \
-    u-boot-stm32mp-splash \
+    kernel-image-${IMAGETYPE}  \
+    u-boot-stm32mp1-extlinux \
+    u-boot-stm32mp1-splash \
 "
 
 # Reset LDCONFIG to avoid runing ldconfig on image.
