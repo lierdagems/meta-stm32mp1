@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ad
 
 SRC_URI = "file://logo.bmp"
 
-B = "${WORKDIR}/build"
+S = "${WORKDIR}"
 
 PV = "1.0"
 
@@ -18,8 +18,8 @@ do_compile[noexec] = "1"
 
 do_install() {
     install -d ${D}/boot
-    if [ -e "${B}/${UBOOT_SPLASH_LOGO}" ]; then
-        install -m 644 ${B}/${UBOOT_SPLASH_LOGO} ${D}/boot/${UBOOT_SPLASH_IMAGE}.bmp
+    if [ -e "${S}/${UBOOT_SPLASH_LOGO}" ]; then
+        install -m 644 ${S}/${UBOOT_SPLASH_LOGO} ${D}/boot/${UBOOT_SPLASH_IMAGE}.bmp
     fi
 }
 
